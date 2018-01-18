@@ -11,5 +11,12 @@
 
             }
         },
+        components: {
+//            Items,
+        },
+        mounted()
+        {
+            console.log("You are logged in");
+        }
     }
 </script>

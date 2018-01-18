@@ -11,11 +11,17 @@ const router  = new VueRouter({
         {
             path: "/login",
             component: Login,
+            meta: {
+                requiresAuth: false,
+            }
         },
         {
             path: "/register",
             component: Register,
-        }
+            meta:  {
+                requiresAuth: false,
+            }
+        },
     ],
     mode: 'history'
 });

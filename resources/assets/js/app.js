@@ -5,12 +5,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import Auth from './packages/auth/auth';
 import router from './router';
+
+require('./bootstrap');
 
 window.Vue = require('vue');
 
-
+Vue.use(Auth);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

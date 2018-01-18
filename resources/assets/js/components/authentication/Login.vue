@@ -63,6 +63,10 @@
                 axios.post('/oauth/token', postData)
                     .then(response => {
                         console.log(response);
+
+                        this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
+
+                        this.$router.push('/');
                     })
             }
         }
