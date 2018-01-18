@@ -30,12 +30,14 @@ router.beforeEach((to, from, next) => {
     {
         if(Vue.auth.isAuthenticated())
         {
-            console.log("You are authenticated");
+            console.log("You are not authenticated");
             next({
                 path: '/items'
             })
-        } else next()
+        }
+        else next()
     }
+
     if(to.matched.some(record => record.meta.requiresAuth))
     {
         if(! Vue.auth.isAuthenticated())
@@ -44,10 +46,13 @@ router.beforeEach((to, from, next) => {
             next({
                 path: '/login'
             })
-        } else next()
+        }
+        else next()
     }
     else next()
 });
+
+
 const app = new Vue({
     el: '#app',
     router,

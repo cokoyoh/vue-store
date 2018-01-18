@@ -11933,12 +11933,13 @@ __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].beforeEach(function (to
         return record.meta.forGuests;
     })) {
         if (Vue.auth.isAuthenticated()) {
-            console.log("You are authenticated");
+            console.log("You are not authenticated");
             next({
                 path: '/items'
             });
         } else next();
     }
+
     if (to.matched.some(function (record) {
         return record.meta.requiresAuth;
     })) {
@@ -11950,6 +11951,7 @@ __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].beforeEach(function (to
         } else next();
     } else next();
 });
+
 var app = new Vue({
     el: '#app',
     router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */]
@@ -11961,6 +11963,8 @@ var app = new Vue({
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = (function (Vue) {
+    var authenticatedUser = false;
+
     Vue.auth = {
         setToken: function setToken(token, expires_in) {
             localStorage.setItem('token', token);
@@ -11979,6 +11983,12 @@ var app = new Vue({
 
                 return null;
             } else return token;
+        },
+        setAuthenticatedUser: function setAuthenticatedUser(someUser) {
+            authenticatedUser = someUser;
+        },
+        getAuthenticatedUser: function getAuthenticatedUser() {
+            return authenticatedUser;
         },
         isAuthenticated: function isAuthenticated() {
             if (this.getToken()) return true;else return false;
@@ -15386,7 +15396,12 @@ if (false) {
 /* 25 */,
 /* 26 */,
 /* 27 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 
 window._ = __webpack_require__(28);
@@ -15400,6 +15415,12 @@ window._ = __webpack_require__(28);
 try {
   window.$ = window.jQuery = __webpack_require__(30);
 } catch (e) {}
+
+window.events = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+window.flash = function (message) {
+  window.events.$emit('flash', message);
+};
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -45698,16 +45719,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {};
     },
 
-    components: {
-        //            'login': Login,
+    methods: {
+        logout: function logout() {
+            console.log("Logging out");
+
+            this.$auth.destroyToken();
+
+            this.$router.push('/login');
+        },
+        setAuthenticatedUser: function setAuthenticatedUser() {
+            axios.get('/api/user').then(function (response) {
+                console.log('Response', response.data);
+            });
+        }
     },
     mounted: function mounted() {
+        //            this.setAuthenticatedUser();
         console.log("You are logged in");
     }
 });
@@ -45720,9 +45768,92 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("router-view")], 1)
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "top-bar" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "top-bar-right" }, [
+          _c(
+            "ul",
+            {
+              staticClass: "menu dropdown",
+              attrs: { "data-dropdown-menu": "" }
+            },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "fa fa-sign-out",
+                    attrs: { "aria-hidden": "true" },
+                    on: { click: _vm.logout }
+                  })
+                ])
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("router-view")
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "top-bar-left" }, [
+      _c(
+        "ul",
+        { staticClass: "dropdown menu", attrs: { "data-dropdown-menu": "" } },
+        [_c("li", { staticClass: "menu-text" }, [_vm._v("Vue Store")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/" } }, [
+        _c("i", { staticClass: "fa fa-home" }),
+        _vm._v(" Home")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/" } }, [
+        _c("i", { staticClass: "fa fa-home" }),
+        _vm._v(" About")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/" } }, [
+        _c("i", { staticClass: "fa fa-envelope-o" }),
+        _vm._v(" Contact")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

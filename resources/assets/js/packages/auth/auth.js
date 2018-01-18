@@ -1,4 +1,7 @@
-export default function (Vue) {
+export default function (Vue)
+{
+    let authenticatedUser = false;
+
     Vue.auth = {
 
         setToken(token, expires_in){
@@ -22,6 +25,16 @@ export default function (Vue) {
                 return null;
             }
             else return token;
+        },
+
+        setAuthenticatedUser(someUser)
+        {
+            authenticatedUser = someUser;
+        },
+
+        getAuthenticatedUser()
+        {
+            return authenticatedUser;
         },
 
         isAuthenticated ()

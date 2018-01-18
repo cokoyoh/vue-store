@@ -17,21 +17,6 @@
 </head>
 <body>
     <div id = "app">
-        <div class = "top-bar">
-            <div class = "top-bar-left">
-                <ul class = "dropdown menu" data-dropdown-menu>
-                    <li class = "menu-text">Vue Store</li>
-                    {{--<li class="menu-text"><routes-link :to="{name:'home'}">News Sources </routes-link></li>--}}
-                </ul>
-            </div>
-            <div class = "top-bar-right">
-                <ul class = "menu dropdown" data-dropdown-menu>
-                    <li><a href = "/"> <i class="fa fa-home"></i> Home</a></li>
-                    <li><a href = "/"> <i class="fa fa-home"></i> About</a></li>
-                    <li><a href = "/"> <i class="fa fa-envelope-o"></i> Contact</a></li>
-                </ul>
-            </div>
-        </div>
         <home></home>
         {{--@yield('content')--}}
     </div>
