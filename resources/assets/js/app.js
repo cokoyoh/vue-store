@@ -22,6 +22,32 @@ Vue.use(Auth);
 Vue.component('home', require('./components/Home.vue'));
 
 
+/**
+ * Auth guards here
+ */
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.forGuests))
+    {
+        if(Vue.auth.isAuthenticated())
+        {
+            console.log("You are authenticated");
+            next({
+                path: '/items'
+            })
+        } else next()
+    }
+    if(to.matched.some(record => record.meta.requiresAuth))
+    {
+        if(! Vue.auth.isAuthenticated())
+        {
+            console.log("You are authenticated");
+            next({
+                path: '/login'
+            })
+        } else next()
+    }
+    else next()
+});
 const app = new Vue({
     el: '#app',
     router,

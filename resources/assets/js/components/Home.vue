@@ -12,7 +12,7 @@
             }
         },
         components: {
-//            Items,
+//            'login': Login,
         },
         mounted()
         {

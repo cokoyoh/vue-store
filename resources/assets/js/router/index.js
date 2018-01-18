@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import Login from '../components/authentication/Login.vue';
 import Register from '../components/authentication/Register.vue';
+import Items from '../components/Items.vue';
 
 const router  = new VueRouter({
     routes: [
@@ -12,18 +13,25 @@ const router  = new VueRouter({
             path: "/login",
             component: Login,
             meta: {
-                requiresAuth: false,
+                forGuests: true,
             }
         },
         {
             path: "/register",
             component: Register,
             meta:  {
-                requiresAuth: false,
+                forGuests: true,
+            }
+        },
+        {
+            path: "/items",
+            component: Items,
+            meta:  {
+                requiresAuth: true,
             }
         },
     ],
-    mode: 'history'
+    // mode: 'history'
 });
 
 export default router

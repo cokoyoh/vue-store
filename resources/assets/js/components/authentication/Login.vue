@@ -66,7 +66,7 @@
 
                         this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
 
-                        this.$router.push('/');
+                        this.$router.push('/items');
                     })
             }
         }
