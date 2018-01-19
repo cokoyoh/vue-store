@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class = "top-bar">
+        <div class = "top-bar" v-show="this.$auth.isAuthenticated()">
             <div class = "top-bar-left">
                 <ul class = "dropdown menu" data-dropdown-menu>
                     <li class = "menu-text">Vue Store</li>
@@ -11,7 +11,7 @@
                     <li><a href = "/"> <i class="fa fa-home"></i> Home</a></li>
                     <li><a href = "/"> <i class="fa fa-home"></i> About</a></li>
                     <li><a href = "/"> <i class="fa fa-envelope-o"></i> Contact</a></li>
-                    <li><a href = "#"><i class="fa fa-sign-out" aria-hidden="true" @click="logout"></i></a></li>
+                    <li><a href = "#"><i class="fa fa-sign-out" aria-hidden="true" @click="logout"></i>Logout</a></li>
                 </ul>
             </div>
         </div>

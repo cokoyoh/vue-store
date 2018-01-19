@@ -23,3 +23,7 @@ Route::get('/test', function (){
        'by' => 'cokoyoh'
    ]);
 });
+
+Route::get('/items', 'ItemsController@index');
+
+Route::delete('/items/destroy/{id}', 'ItemsController@destroy');
