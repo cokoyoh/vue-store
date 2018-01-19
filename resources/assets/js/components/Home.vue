@@ -45,7 +45,7 @@
          methods: {
             logout()
             {
-                console.log("Logging out");
+                console.log("Logging out");  
 
                 this.$auth.destroyToken();
 
