@@ -25,10 +25,11 @@ Route::get('/test', function (){
 });
 
 Route::group(['middleware' => 'auth:api'], function (){
-    Route::get('/items', 'ItemsController@index');
 
     Route::post('/items-store', 'ItemsController@store');
 
     Route::delete('/items/destroy/{id}', 'ItemsController@destroy');
 });
+
+Route::get('/items', 'ItemsController@index');
 
