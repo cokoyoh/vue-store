@@ -7,6 +7,7 @@
 
 import Auth from './packages/auth/auth';
 import router from './router';
+import store from './storage/store';
 
 require('./bootstrap');
 
@@ -60,4 +61,5 @@ router.beforeEach((to, from, next) => {
 const app = new Vue({
     el: '#app',
     router,
+    store,
 });

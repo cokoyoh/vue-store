@@ -73,18 +73,25 @@
                         swal('Adding Item', response.data.message, 'success');
 
                         this.item = {};
+
+                        this.$emit('itemAdded', this.item);
                     })
                     .catch(response => {
                         console.log(response);
                     })
             },
-            imageChanged(e){
+            imageChanged(e)
+            {
                 console.log(e.target.files[0]);
+
                 let fileReader = new FileReader();
+
                 fileReader.readAsDataURL(e.target.files[0]);
+
                 fileReader.onload = (e) => {
                     this.item.image = e.target.result
                 };
+
                 console.log(this.item)
             },
         }

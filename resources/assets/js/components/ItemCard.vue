@@ -1,15 +1,16 @@
 <template>
     <div class="grid-x">
-        <div class="medium-4 large-4 cell"  v-for = "item in itemArray">
+        <div class="medium-4 large-4 cell"  v-for = "item in items">
             <div class="card">
-                <img :src = "'/images/items/' + item.image"
-                     style = "height: 255px; width: 255px;" @click="show(item)">
-                <!--<p class="my-description">{{item.name}}</p>-->
-                <p class="my-description"><strong>KSh {{item.price}}</strong></p>
-                <hr>
+               <div @click="show(item)">
+                   <img :src = "'/images/items/' + item.image"
+                        style = "height: 255px; width: 255px;" >
+                   <!--<p class="my-description">{{item.name}} </p>-->
+                   <p><strong>KSh {{item.price}}</strong></p>
+               </div>
                 <div class="grid-x">
                     <div class="medium-4 large-4 cell">
-                        <button class="button success tiny">Buy</button>
+                        <button class="button success tiny" @click="addToCart(item)">Buy</button>
                     </div>
                     <div class="medium-4 large-4 cell">
                         <button class="button primary tiny">Edit</button>
@@ -23,13 +24,22 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex';
+
     export default {
-        props: ['itemArray'],
+        props: ['items'],
         data() {
             return {
-                items: []
+                cart: []
             }
         },
+
+        computed: {
+            ...mapState({
+                cartStore:state => state.cartStore
+            })
+        },
+
         methods: {
             destroy(id)
             {
@@ -56,6 +66,17 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Close'
                 })
+            },
+
+            addToCart(item)
+            {
+                this.cart.push(item);
+
+                this.$store.dispatch('setCartItem',this.cart);
+
+                let message = 'You have added ' + this.cart.length + ' item(s) to the cart';
+
+                    swal('Success', message, 'success');
             }
 
         },
@@ -63,7 +84,6 @@
         {
             console.log(this.itemArray);
         },
-        name: "item-card"
     }
 
 </script>

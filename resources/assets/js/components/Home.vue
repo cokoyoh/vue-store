@@ -10,8 +10,8 @@
                 <ul class = "menu dropdown" data-dropdown-menu>
                     <li><a href = "/"> <i class="fa fa-home"></i> Home</a></li>
                     <li><a href = "/"> <i class="fa fa-home"></i> About</a></li>
-                    <li><a href = "/"> <i class="fa fa-envelope-o"></i> Contact</a></li>
-                    <li><a href = "#"><i class="fa fa-sign-out" aria-hidden="true" @click="logout"></i>Logout</a></li>
+                    <li><a href = "#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                    <li><a href = "#"  @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -21,6 +21,7 @@
 
 <script>
     import {get_header} from "../global/config";
+    import {mapState} from 'vuex';
 
     export default {
         data() {
@@ -28,6 +29,13 @@
 
             }
         },
+
+        computed: {
+            ...mapState({
+                userStore:state => state.userStore,
+            })
+        },
+
          methods: {
             logout()
             {
@@ -42,7 +50,12 @@
              {
                  axios.get('/api/user', {headers:get_header()})
                      .then(response => {
-                         console.log('Response', response.data);
+
+                         this.$auth.setAuthenticatedUser(response.data);
+
+                         console.log("Authenticated - ",this.$auth.getAuthenticatedUser());
+
+                         this.$store.dispatch('setUserObject',this.$auth.getAuthenticatedUser());
                      })
              }
          },

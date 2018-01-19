@@ -13,24 +13,27 @@
             </div>
         </div>
 
-        <item-card :itemArray="arrayItems" ></item-card>
-        <add-item></add-item>
+        <item-card :items="items" ></item-card>
+        <add-item @itemAdded="add"></add-item>
     </div>
 </template>
 <script>
     import AddItem from './AddItem.vue'
     import ItemCard from './ItemCard';
     import {get_header} from "../global/config";
+    import collection from '../mixins/Collection';
+
     export default {
+        mixins: [collection],
         data() {
             return {
-                items: false,
-                arrayItems: [],
+                items: [],
             }
         },
         mounted() {
              this.fetchItems();
         },
+
         components: {
           'item-card' : ItemCard,
             'add-item' : AddItem
@@ -41,9 +44,13 @@
                 axios.get('api/items', {headers:get_header()})
                     .then(response => {
                         this.items = response.data;
-
-                        this.arrayItems= this.items.data;
                     })
+            },
+            add(item)
+            {
+                this.items.push(item);
+
+                this.$emit('added');
             },
         }
     }

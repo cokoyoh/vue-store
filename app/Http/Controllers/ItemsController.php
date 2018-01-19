@@ -9,7 +9,7 @@ class ItemsController extends Controller
 {
     public function index()
     {
-        $items = Item::orderBy('id', 'desc')->paginate(10);
+        $items = Item::orderBy('id', 'desc')->get();
 
         if (request()->expectsJson())
         {
@@ -19,7 +19,6 @@ class ItemsController extends Controller
 
     public function store()
     {
-//        dd(request()->all());
         request()->validate([
             'name' => 'required',
             'description' => 'required',
