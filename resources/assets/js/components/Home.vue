@@ -10,24 +10,30 @@
                 <ul class = "menu dropdown" data-dropdown-menu>
                     <li><a href = "/"> <i class="fa fa-home"></i> Home</a></li>
                     <li><a href = "/"> <i class="fa fa-home"></i> About</a></li>
-                    <li><a href = "#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                    <li><a href = "#"><i class="fa fa-shopping-cart" aria-hidden="true" data-open="cart"></i></a></li>
                     <li><a href = "#"  @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                 </ul>
             </div>
         </div>
         <router-view></router-view>
+        <cart></cart>
     </div>
 </template>
 
 <script>
     import {get_header} from "../global/config";
     import {mapState} from 'vuex';
+    import Cart from './Cart.vue';
 
     export default {
         data() {
             return {
 
             }
+        },
+
+        components: {
+            'cart': Cart,
         },
 
         computed: {

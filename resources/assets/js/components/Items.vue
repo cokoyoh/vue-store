@@ -6,7 +6,9 @@
                  style="align-items: flex-start"
                  v-show="this.$auth.isAuthenticated()"
             >
-                <button class="button primary medium" data-open="createItem"
+                <button class="button primary medium"
+                        data-open="createItem"
+                        v-show="admin"
                 >
                     Add New Item
                 </button>
@@ -28,6 +30,7 @@
         data() {
             return {
                 items: [],
+                isAdmin: false,
             }
         },
         mounted() {
@@ -37,6 +40,21 @@
         components: {
           'item-card' : ItemCard,
             'add-item' : AddItem
+        },
+        computed: {
+            admin()
+            {
+                let user = this.$auth.getAuthenticatedUser();
+
+                console.log("Auth user - ", user);
+
+                if(user.id === 1)
+                {
+                    this.isAdmin = true;
+
+                    return this.isAdmin;
+                }
+            }
         },
         methods: {
             fetchItems()

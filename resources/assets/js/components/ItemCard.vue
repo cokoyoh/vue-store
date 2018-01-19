@@ -6,17 +6,22 @@
                    <img :src = "'/images/items/' + item.image"
                         style = "height: 255px; width: 255px;" >
                    <!--<p class="my-description">{{item.name}} </p>-->
-                   <p><strong>KSh {{item.price}}</strong></p>
+                   <p class="my-description"><strong>KSh {{item.price}}</strong></p>
                </div>
                 <div class="grid-x">
                     <div class="medium-4 large-4 cell">
                         <button class="button success tiny" @click="addToCart(item)">Buy</button>
                     </div>
                     <div class="medium-4 large-4 cell">
-                        <button class="button primary tiny">Edit</button>
+                        <button class="button primary tiny"  v-show="admin">Edit</button>
                     </div>
                     <div class="medium-4 large-4 cell">
-                        <button class="button alert tiny" @click="destroy(item.id)">Delete</button>
+                        <button class="button alert tiny"
+                                @click="destroy(item.id)"
+                                v-show="admin"
+                        >
+                            Delete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -25,29 +30,43 @@
 </template>
 <script>
     import {mapState} from 'vuex';
+    import {get_header} from "../global/config";
 
     export default {
         props: ['items'],
         data() {
             return {
-                cart: []
+                cart: [],
+                isAdmin: false,
             }
         },
 
         computed: {
             ...mapState({
                 cartStore:state => state.cartStore
-            })
+            }),
+
+            admin()
+            {
+                let user = this.$auth.getAuthenticatedUser();
+
+                if(user.id === 1)
+                {
+                    this.isAdmin = true;
+
+                    return this.isAdmin;
+                }
+            }
         },
 
         methods: {
             destroy(id)
             {
-                axios.delete('api/items/destroy/'+ id)
+                axios.delete('api/items/destroy/'+ id, {headers:get_header()})
                     .then(response => {
                         console.log(response);
 
-                        console.log('Item has been deleted!');
+                         swal('Success','Item has been deleted!', 'success');
 
                         this.$emit('deleted', id);
                     })
