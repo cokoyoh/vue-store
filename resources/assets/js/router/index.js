@@ -12,23 +12,23 @@ const router  = new VueRouter({
         {
             path: "/login",
             component: Login,
-            meta: {
-                forGuests: true,
-            }
+            // meta: {
+            //     forGuests: true,
+            // }
         },
         {
             path: "/register",
             component: Register,
-            meta:  {
-                forGuests: true,
-            }
+            // meta:  {
+            //     forGuests: true,
+            // }
         },
         {
             path: "/items",
             component: Items,
-            meta:  {
-                requiresAuth: false,
-            }
+            // meta:  {
+            //     requiresAuth: false,
+            // }
         },
     ],
     // mode: 'history'
