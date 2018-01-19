@@ -27,7 +27,7 @@ const router  = new VueRouter({
             path: "/items",
             component: Items,
             meta:  {
-                requiresAuth: true,
+                requiresAuth: false,
             }
         },
     ],
