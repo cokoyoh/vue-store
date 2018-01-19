@@ -25,7 +25,7 @@
 
                 </div>
                 <div class = "login-button medium-12 cell">
-                    <button class = "button medium" type = "submit" @click="submit"><i class="fa fa-power-off"></i> Login</button>
+                    <button class = "button medium" type = "submit" @click="onSubmit"><i class="fa fa-power-off"></i> Login</button>
                 </div>
             </div>
         </div>
@@ -36,8 +36,8 @@
         data() {
             return {
                 login : {
-                    email: 'john@example.com',
-                    password: 'secret',
+                    email: '',
+                    password: '',
                 }
             }
         },
@@ -46,7 +46,7 @@
             console.log("Login Created");
         },
         methods: {
-            submit()
+            onSubmit()
             {
                 let postData = {
                     client_id: 2,
@@ -62,7 +62,6 @@
 
                 axios.post('/oauth/token', postData)
                     .then(response => {
-                        console.log(response);
 
                         this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
 

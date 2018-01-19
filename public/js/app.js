@@ -16298,8 +16298,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             login: {
-                email: 'john@example.com',
-                password: 'secret'
+                email: '',
+                password: ''
             }
         };
     },
@@ -16308,7 +16308,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        submit: function submit() {
+        onSubmit: function onSubmit() {
             var _this = this;
 
             var postData = {
@@ -16324,7 +16324,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
 
             axios.post('/oauth/token', postData).then(function (response) {
-                console.log(response);
 
                 _this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
 
@@ -16418,7 +16417,7 @@ var render = function() {
               {
                 staticClass: "button medium",
                 attrs: { type: "submit" },
-                on: { click: _vm.submit }
+                on: { click: _vm.onSubmit }
               },
               [_c("i", { staticClass: "fa fa-power-off" }), _vm._v(" Login")]
             )
