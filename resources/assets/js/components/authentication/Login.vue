@@ -51,7 +51,7 @@
                 let postData = {
                     client_id: 2,
 
-                    client_secret: '8iLExui8LXwC5yfO5s1r7wD9Wxyuc80YjPySeTV8',
+                    client_secret: 'mfhNcU9U5C8YyGcqVtzonZVMUKRS6glU5wIMklmp',
 
                     grant_type: 'password',
 

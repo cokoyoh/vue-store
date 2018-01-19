@@ -17,6 +17,42 @@ class ItemsController extends Controller
         }
     }
 
+    public function store()
+    {
+//        dd(request()->all());
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'number' => 'required'
+        ]);
+
+        $exploded = explode(',', request('image'));
+        $decoded = base64_decode($exploded[1]);
+        if (str_contains($exploded[0], 'jpeg'))
+        {
+            $extension = 'jpg';
+        } else
+            $extension = 'png';
+        $file_name = time() . '.' . $extension;
+
+        $path = public_path('/images/items/' . $file_name);
+        file_put_contents($path, $decoded);
+
+        Item::create([
+            'image' => $file_name,
+            'name' => request('name'),
+            'description' => request('description'),
+            'price' => request('price'),
+            'number' => request('number')
+        ]);
+
+        if(\request()->wantsJson())
+        {
+            return response()->json(['message', 'Item added successfully'], 200);
+        }
+    }
+
     public function destroy($id)
     {
         $item = Item::findOrFail($id);

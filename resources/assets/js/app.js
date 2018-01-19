@@ -20,6 +20,10 @@ Vue.use(Auth);
  */
 
 Vue.component('home', require('./components/Home.vue'));
+// Vue.component('items', require('./components/Items.vue'));
+// Vue.component('add-item', require('./components/AddItem.vue'));
+// Vue.component('item-card', require('./components/ItemCard.vue'));
+
 
 
 /**

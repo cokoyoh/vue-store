@@ -20,6 +20,8 @@
 </template>
 
 <script>
+    import {get_header} from "../global/config";
+
     export default {
         data() {
             return {
@@ -38,7 +40,7 @@
 
              setAuthenticatedUser()
              {
-                 axios.get('/api/user')
+                 axios.get('/api/user', {headers:get_header()})
                      .then(response => {
                          console.log('Response', response.data);
                      })
@@ -46,7 +48,7 @@
          },
         mounted()
         {
-//            this.setAuthenticatedUser();
+            this.setAuthenticatedUser();
             console.log("You are logged in");
         }
     }

@@ -6,42 +6,21 @@
                  style="align-items: flex-start"
                  v-show="this.$auth.isAuthenticated()"
             >
-                <button class="button primary medium">
+                <button class="button primary medium" data-open="createItem"
+                >
                     Add New Item
                 </button>
             </div>
         </div>
 
         <item-card :itemArray="arrayItems" ></item-card>
-
-        <!--<div class="grid-x">-->
-            <!--<div class="medium-4 large-4 cell"  v-for = "item in arrayItems">-->
-                <!--<div class="card">-->
-                    <!--<img :src = "'/images/items/' + item.image"-->
-                         <!--style = "height: 255px; width: 255px;">-->
-                    <!--&lt;!&ndash;<p class="my-description">{{item.description}}</p>&ndash;&gt;-->
-                    <!--<span>KSh {{item.price}}</span>-->
-                    <!--&lt;!&ndash;<p style = "text-align: center"><strong>KSh {{item.price}}</strong></p>&ndash;&gt;-->
-                    <!--<hr>-->
-                    <!--<div class="grid-x">-->
-                        <!--<div class="medium-4 large-4 cell">-->
-                            <!--<button class="button success tiny">Buy</button>-->
-                        <!--</div>-->
-                        <!--<div class="medium-4 large-4 cell">-->
-                            <!--<button class="button primary tiny">Edit</button>-->
-                        <!--</div>-->
-                        <!--<div class="medium-4 large-4 cell">-->
-                            <!--<button class="button alert tiny" @click="destroy(item.id)">Delete</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
+        <add-item></add-item>
     </div>
 </template>
 <script>
-    import ItemCard from './ItemCard.vue';
+    import AddItem from './AddItem.vue'
+    import ItemCard from './ItemCard';
+    import {get_header} from "../global/config";
     export default {
         data() {
             return {
@@ -54,11 +33,12 @@
         },
         components: {
           'item-card' : ItemCard,
+            'add-item' : AddItem
         },
         methods: {
             fetchItems()
             {
-                axios.get('api/items')
+                axios.get('api/items', {headers:get_header()})
                     .then(response => {
                         this.items = response.data;
 

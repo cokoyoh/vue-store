@@ -4,7 +4,8 @@
             <div class="card">
                 <img :src = "'/images/items/' + item.image"
                      style = "height: 255px; width: 255px;" @click="show(item)">
-                <p>KSh {{item.price}}</p>
+                <!--<p class="my-description">{{item.name}}</p>-->
+                <p class="my-description"><strong>KSh {{item.price}}</strong></p>
                 <hr>
                 <div class="grid-x">
                     <div class="medium-4 large-4 cell">
@@ -61,7 +62,8 @@
         mounted()
         {
             console.log(this.itemArray);
-        }
+        },
+        name: "item-card"
     }
 
 </script>
