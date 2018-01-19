@@ -13302,6 +13302,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     routes: [{
+        path: "/",
+        component: __WEBPACK_IMPORTED_MODULE_4__components_Items_vue___default.a,
+        meta: {}
+    }, {
         path: "/login",
         component: __WEBPACK_IMPORTED_MODULE_2__components_authentication_Login_vue___default.a,
         meta: {
@@ -13317,7 +13321,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: "/items",
         component: __WEBPACK_IMPORTED_MODULE_4__components_Items_vue___default.a,
         meta: {
-            requiresAuth: true
+            requiresAuth: false
         }
     }]
     // mode: 'history'
